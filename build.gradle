@@ -12,7 +12,7 @@ plugins {
   id 'application'
 }
 
-mainClassName = 'aoc2018.Day4Kt'
+mainClassName = 'aoc2018.Day5Kt'
 
 repositories {
   // Use jcenter for resolving your dependencies.

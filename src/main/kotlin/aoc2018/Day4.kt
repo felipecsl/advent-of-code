@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import java.util.Locale
 
-
 enum class EventType {
   WAKE_UP, FALL_ASLEEP, BEGIN_SHIFT
 }
