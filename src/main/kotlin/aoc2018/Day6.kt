@@ -96,16 +96,11 @@ class Day6 {
     val bottomMostCoord = coordinates.maxBy { it.y }!!
     val leftMostCoord = coordinates.minBy { it.x }!!
     val rightMostCoord = coordinates.maxBy { it.x }!!
-    val outerCoordIds = listOf(
-        topMostCoord.id,
-        bottomMostCoord.id,
-        leftMostCoord.id,
-        rightMostCoord.id
-    )
+    val outerCoordIds = listOf(topMostCoord.id, bottomMostCoord.id, leftMostCoord.id, rightMostCoord.id)
     val points = mutableListOf<Coord>()
     val distances = mutableListOf<PointWithTotalDistance>()
-    (topMostCoord.y - 1 .. bottomMostCoord.y).forEach { y ->
-      (leftMostCoord.x - 1 .. rightMostCoord.x + 1).forEach { x ->
+    (topMostCoord.y - 1..bottomMostCoord.y).forEach { y ->
+      (leftMostCoord.x - 1..rightMostCoord.x + 1).forEach { x ->
         val matchingCoord = coordinates.firstOrNull { it.x == x && it.y == y }
         val totalDistances = coordinates.sumBy { it.distanceTo(x, y) }
         if (totalDistances < regionMaxTotalDistance) {
@@ -113,23 +108,15 @@ class Day6 {
         }
         if (matchingCoord != null) {
           // found a coord at this point
-          val formattedId = String.format("%02d", matchingCoord.id)
           if (!outerCoordIds.contains(matchingCoord.id)) {
             points.add(matchingCoord)
           }
-//          print("[$formattedId] ")
         } else {
           val closestCoord = findClosestCoordTo(x, y, coordinates)
           if (closestCoord != null) {
             // there's a single coord that's the closest one to this point
-            val formattedId = String.format("%02d", closestCoord.id)
             if (!outerCoordIds.contains(closestCoord.id)) {
               points.add(closestCoord)
-//              if (totalDistances < regionMaxTotalDistance) {
-//                print("|##| ")
-//              } else {
-//                print("|$formattedId| ")
-//              }
               // check for edges
               if (x == leftMostCoord.x - 1
                   || x == rightMostCoord.x + 1
@@ -137,20 +124,10 @@ class Day6 {
                   || y == bottomMostCoord.y - 1) {
                 closestCoord.isInfinite = true
               }
-            } else {
-//              print("|$formattedId| ")
-            }
-          } else {
-            // multiple coords match with same distance
-            if (totalDistances < regionMaxTotalDistance) {
-//              print("|##| ")
-            } else {
-//              print("|..| ")
             }
           }
         }
       }
-//      println()
     }
 
     val largestAreasFirst = points
