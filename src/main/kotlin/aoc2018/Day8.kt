@@ -15,11 +15,7 @@ data class Day8Node(
       metadata.sum()
     } else {
       metadata.map { i ->
-        if (i == 0 || i - 1 >= childNodes.size) {
-          0
-        } else {
-          childNodes[i - 1].value()
-        }
+        if (i == 0 || i - 1 >= childNodes.size) 0 else childNodes[i - 1].value()
       }.sum()
     }
   }
@@ -46,7 +42,6 @@ class Day8 {
     val nums = input.split(" ").map(String::toInt).toMutableList()
     return if (nums.size >= 2) {
       parseNodes(nums, null)
-      println(root)
       root.sumOfMetadataEntries()
     } else {
       0
@@ -62,17 +57,9 @@ class Day8 {
       return
     } else {
       val node = parseNode(nums)
-      if (currentNode == null) {
-        root = node
-      } else {
-        currentNode.childNodes.add(node)
-      }
-      for (it in 0 until node.childCount) {
-        parseNodes(nums, node)
-      }
-      (0 until node.metadataCount).forEach {
-        node.metadata.add(nums.removeAt(0))
-      }
+      if (currentNode == null) root = node else currentNode.childNodes.add(node)
+      for (it in 0 until node.childCount) parseNodes(nums, node)
+      (0 until node.metadataCount).forEach { node.metadata.add(nums.removeAt(0)) }
     }
   }
 
