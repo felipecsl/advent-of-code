@@ -1,14 +1,16 @@
 package aoc2018
 
-import com.sun.xml.internal.xsom.impl.UName.comparator
 import java.util.*
 
 class Node(
     val name: Char,
-    val nextNodes: SortedSet<Node> = TreeSet<Node> { a, b -> a.name.compareTo(b.name) }
+    val nextNodes: SortedSet<Node> = TreeSet<Node> { a, b -> a.name.compareTo(b.name) },
+    var startTime: Int = 0
 ) {
+  val duration = name.toInt() - 4
+
   override fun toString(): String {
-    return "Node(name='$name', nextNodes=${nextNodes.map { it.name }})"
+    return "Node(name='$name', startTime=$startTime, nextNodes=${nextNodes.map { it.name }})"
   }
 
   fun isLeaf() = nextNodes.isEmpty()
@@ -66,10 +68,20 @@ class Day7 {
       thisNode.nextNodes.add(nextNode)
     }
     findRoots()
-    printNodes()
     val path = determineOrder()
+    printNodes()
     println("Part I: $path")
+    val timeToComplete = determineTimeToComplete()
     return path
+  }
+
+  private fun determineTimeToComplete(totalWorkers: Int = 5): Int {
+//    val currTime = 0
+//    val workers = IntArray(totalWorkers)
+//    val queue: SortedSet<Node> = TreeSet(comparator)
+//    queue.addAll(roots)
+//    while ()
+    return 0
   }
 
   private fun determineOrder(): String {
@@ -81,6 +93,9 @@ class Day7 {
           ?: throw IllegalStateException("Cant find suitable node to visit. Current path $visitedPath")
       queue.remove(node)
       visitedPath.add(node)
+      node.nextNodes.forEach {
+        it.startTime = node.startTime + node.duration
+      }
       queue.addAll(node.nextNodes)
     }
     return visitedPath.map(Node::name).joinToString("")
