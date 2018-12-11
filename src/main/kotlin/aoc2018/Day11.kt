@@ -7,6 +7,22 @@ class Day11(private val serialNumber: Int) {
   private val totalPowers: MutableMap<Triple<Int, Int, Int>, Int> = mutableMapOf()
 
   fun solve() {
+    solvePartI()
+    solvePartII()
+  }
+
+  fun solvePartI() {
+    val size = 3
+    val max = (0 until 300 - size).flatMap { y ->
+      (0 until 300 - size).map { x ->
+        Square(x, y, size, totalPower(x, y, size))
+      }
+    }.maxBy { it.totalPower }!!
+    println("Part I: ${max.x},${max.y}")
+  }
+
+  fun solvePartII() {
+    println("Part II: ")
     val max = (1 until 300).flatMap { size ->
       print(".")
       (0 until 300 - size).flatMap { y ->
@@ -14,8 +30,8 @@ class Day11(private val serialNumber: Int) {
           Square(x, y, size, totalPower(x, y, size))
         }
       }
-    }.maxBy { it.totalPower }
-    println(max)
+    }.maxBy { it.totalPower }!!
+    println("\n${max.x},${max.y},${max.size}")
   }
 
   private fun powerLevel(x: Int, y: Int): Int {
@@ -36,7 +52,10 @@ class Day11(private val serialNumber: Int) {
         it
       }
     } else {
-      val prevSize = totalPowers[Triple(x, y, size - 1)]!!
+      val prevSize = totalPowers[Triple(x, y, size - 1)] ?: calcTotalPower(x, y, size).let {
+        totalPowers[Triple(x, y, size)] = it
+        it
+      }
       val lastRow = (x until x + size).map { xa ->
         calcPowerLevel(xa, y + size - 1)
       }.sum()
