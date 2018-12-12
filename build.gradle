@@ -12,7 +12,7 @@ plugins {
   id 'application'
 }
 
-mainClassName = 'aoc2018.Day11Kt'
+mainClassName = 'aoc2018.Day12Kt'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

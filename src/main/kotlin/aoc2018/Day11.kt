@@ -11,7 +11,7 @@ class Day11(private val serialNumber: Int) {
     solvePartII()
   }
 
-  fun solvePartI() {
+  private fun solvePartI() {
     val size = 3
     val max = (0 until 300 - size).flatMap { y ->
       (0 until 300 - size).map { x ->
@@ -21,7 +21,7 @@ class Day11(private val serialNumber: Int) {
     println("Part I: ${max.x},${max.y}")
   }
 
-  fun solvePartII() {
+  private fun solvePartII() {
     println("Part II: ")
     val max = (1 until 300).flatMap { size ->
       print(".")
@@ -36,10 +36,9 @@ class Day11(private val serialNumber: Int) {
 
   private fun powerLevel(x: Int, y: Int): Int {
     val rackId = x + 10
-    val powerLevel = (rackId * y + serialNumber) * rackId
-    val powerLevelString = powerLevel.toString()
-    return if (powerLevelString.length >= 3) {
-      powerLevelString[powerLevelString.length - 3].toString().toInt()
+    val powerLevel = ((rackId * y + serialNumber) * rackId).toString()
+    return if (powerLevel.length >= 3) {
+      powerLevel[powerLevel.length - 3].toString().toInt()
     } else {
       0
     } - 5
