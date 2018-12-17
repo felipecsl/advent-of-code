@@ -28,6 +28,9 @@ class Day12 {
       }
       state = mutableState.joinToString("")
     }
+    // For part II, manually run and output the sum every 100-1000 iterations to see that it quickly
+    // stabilizes after running for a bit. Then, manually do the math to find the final sum after
+    // 50B generations.
     return findSum(state)
   }
 

@@ -1,7 +1,5 @@
 package aoc2018
 
-data class Coords(var x: Long, var y: Long)
-
 data class Point(val coords: Coords, val velX: Long, val velY: Long)
 
 class Day10 {
