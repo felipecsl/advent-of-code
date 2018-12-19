@@ -13,6 +13,6 @@ class Day13KtTest {
 \-+-/  \-+--/
   \------/
 """.trimIndent()
-    assertEquals("7,3", Day13().solve(input))
+    assertEquals("(7, 3)", Day13().solve(input))
   }
 }
