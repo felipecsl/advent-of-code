@@ -14,6 +14,7 @@ fn main() {
       "14" => solutions::day14::run(),
       "18" => solutions::day18::run(),
       "22" => solutions::day22::run(),
+      "32" => solutions::chess::run(),
       _ => println!("Solution not implemented {:?}", solution_num),
     }
   }
