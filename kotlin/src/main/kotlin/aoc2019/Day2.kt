@@ -20,12 +20,8 @@ class Day2 {
     }
     instructions.forEach {
       val result = when (it.opcode) {
-        1 -> {
-          input[it.op1] + input[it.op2]
-        }
-        2 -> {
-          input[it.op1] * input[it.op2]
-        }
+        1 -> input[it.op1] + input[it.op2]
+        2 -> input[it.op1] * input[it.op2]
         else -> throw IllegalStateException("Invalid opcode ${it.opcode}")
       }
       input[it.op3] = result
