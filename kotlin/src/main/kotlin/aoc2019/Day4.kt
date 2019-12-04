@@ -26,19 +26,17 @@ class Day4 {
   fun hasTwoEqualAdjacentDigitsNoLargerGroup(pwd: String): Boolean {
     val chars = pwd.chars().toList()
     var i = 1
-    var count = 0
+    var count = 1
     while (i < chars.size) {
       if (chars[i - 1] == chars[i]) {
         count++
       } else {
-        if (count == 2) {
-          return true
-        }
+        if (count == 2) return true
         count = 1
       }
       i++
     }
-    return false
+    return count == 2
   }
 
   private fun hasTwoEqualAdjacentDigits(pwd: String): Boolean {
